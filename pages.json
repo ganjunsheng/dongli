@@ -3,7 +3,7 @@
     {
       "path": "pages/index/index",
       "style": {
-        "navigationBarTitleText": "村里事儿",
+        "navigationBarTitleText": "东篱",
         "navigationBarBackgroundColor": "#2E7D32",
         "navigationBarTextStyle": "white",
         "enablePullDownRefresh": true
