@@ -14,7 +14,7 @@ let searchTimer = null
 /* ========== 状态栏高度 ========== */
 const statusBarHeight = computed(() => {
   const info = uni.getSystemInfoSync()
-  return (info.statusBarHeight || 20) + 6
+  return info.statusBarHeight || 20
 })
 
 /* ========== 分类 Tab ========== */
@@ -256,6 +256,9 @@ function goBack() {
 }
 
 onMounted(() => {
+  // 关闭首页传来的 loading
+  uni.hideLoading()
+  
   loadHistory()
   
   // 从 URL 参数读取预选 tab
@@ -272,9 +275,9 @@ onMounted(() => {
 
 <template>
   <view class="page-search">
-    <!-- 搜索头部（自定义导航 + 填满状态栏区域） -->
+    <!-- 搜索头部（自定义导航，填满状态栏区域） -->
     <view class="search-header-wrap">
-      <view class="search-status-bar" :style="{ height: statusBarHeight + 'px' }"></view>
+      <view class="search-status-bar" :style="{ height: (statusBarHeight + 44) + 'px' }"></view>
       <view class="search-header">
         <view class="search-back" @click="goBack">
           <text class="iconfont icon-back"></text>
@@ -420,7 +423,7 @@ onMounted(() => {
   background: $bg-page;
 }
 
-/* ===== 搜索头部（填满状态栏区域，无间隙） ===== */
+/* ===== 搜索头部（填满状态栏区域） ===== */
 .search-header-wrap {
   background: $primary;
 }
@@ -434,7 +437,6 @@ onMounted(() => {
   align-items: center;
   height: 88rpx;
   padding: 0 24rpx;
-  // 消除底部可能的空隙
   margin-bottom: 0;
 
   .search-back {

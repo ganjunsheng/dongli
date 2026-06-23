@@ -1,17 +1,11 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { onPullDownRefresh } from '@dcloudio/uni-app'
 import { getNoticeList } from '@/api/village'
 import { getProductList } from '@/api/mall'
 import { getLocationInfo, chooseLocation } from '@/utils/location'
 import BaseCard from '@/components/BaseCard.vue'
 import BaseButton from '@/components/BaseButton.vue'
-
-/* ========== 状态栏 ========== */
-const statusBarHeight = computed(() => {
-  const info = uni.getSystemInfoSync()
-  return (info.statusBarHeight || 20) + 6
-})
 
 /* ========== 定位村庄 ========== */
 const villageName = ref('定位中...')
@@ -105,6 +99,10 @@ function goPage(url) {
     uni.showToast({ title: '即将开放', icon: 'none' })
     return
   }
+  // 搜索页加载较慢，显示 loading
+  if (url.includes('/search/')) {
+    uni.showLoading({ title: '加载中...', mask: true })
+  }
   uni.navigateTo({ url })
 }
 
@@ -127,7 +125,7 @@ onMounted(() => {
 <template>
   <view class="page-index">
     <!-- 自定义导航栏 -->
-    <view class="navbar" :style="{ paddingTop: statusBarHeight + 'px' }">
+    <view class="navbar">
       <view class="navbar-content">
         <view class="navbar-left" @click="handleLocationTap">
           <text class="iconfont icon-location"></text>
@@ -224,7 +222,7 @@ onMounted(() => {
 /* 导航栏 */
 .navbar {
   background: $primary;
-  padding-bottom: 20rpx;
+  padding: 22rpx 0 20rpx;
   
   .navbar-content {
     display: flex;
