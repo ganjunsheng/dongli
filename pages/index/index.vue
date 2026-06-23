@@ -110,7 +110,7 @@ onMounted(() => {
     <view class="grid-section">
       <view class="grid-item" v-for="item in gridList" :key="item.id"
         @click="goPage(item.url)">
-        <view class="grid-icon" :class="`icon-${item.icon}`"></view>
+        <view class="grid-icon iconfont" :class="`icon-${item.icon}`"></view>
         <text class="grid-title">{{ item.title }}</text>
       </view>
     </view>
