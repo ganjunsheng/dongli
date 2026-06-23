@@ -1,7 +1,7 @@
 {
   "name": "uni-app-server",
   "version": "1.0.0",
-  "description": "村里事儿 Node.js 后端服务",
+  "description": "东篱 Node.js 后端服务",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

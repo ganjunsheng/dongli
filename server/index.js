@@ -268,7 +268,7 @@ app.post('/api/upload/avatar', (req, res) => {
 
 // ==================== 启动 ====================
 app.listen(PORT, () => {
-  console.log(`\n  ✅ 村里事儿 API 服务已启动`);
+  console.log(`\n  ✅ 东篱 API 服务已启动`);
   console.log(`  📡 地址: http://localhost:${PORT}`);
   console.log(`  📋 共 ${Object.keys(data).length} 个数据模块\n`);
 });

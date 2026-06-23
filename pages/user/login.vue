@@ -169,8 +169,8 @@ onUnmounted(() => {
     <!-- Logo -->
     <view class="login-header">
       <image class="logo" src="/static/images/logo.png" mode="aspectFit" />
-      <text class="app-name">村里事儿</text>
-      <text class="app-desc">乡村综合服务平台</text>
+      <text class="app-name">东篱</text>
+      <text class="app-desc">采菊东篱下，悠然见南山</text>
     </view>
 
     <!-- 登录表单 -->
