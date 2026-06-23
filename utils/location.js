@@ -42,38 +42,51 @@ export function getCurrentLocation() {
 
 /**
  * 反向地理编码 - 通过坐标获取地址
- * 使用免费 Nominatim API（OpenStreetMap）
- * 生产环境建议替换为腾讯地图 WebService API：https://apis.map.qq.com/ws/geocoder/v1/
+ * 优先尝试 Nominatim（国外可用），3 秒超时后本地兜底
+ * 生产环境建议配置腾讯地图 key 替换：
+ *   https://apis.map.qq.com/ws/geocoder/v1/?location=${lat},${lng}&key=YOUR_KEY
  * @param {number} latitude
  * @param {number} longitude
- * @returns {Promise<{village:string, address:string, fullAddress:string}>}
+ * @returns {Promise<{village:string, address:string}>}
  */
 export function reverseGeocode(latitude, longitude) {
   return new Promise((resolve) => {
+    let settled = false
+
+    // 3 秒超时兜底
+    const timer = setTimeout(() => {
+      if (!settled) {
+        settled = true
+        resolve({ village: '附近', address: '附近' })
+      }
+    }, 3000)
+
     uni.request({
       url: `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=14&addressdetails=1&accept-language=zh`,
-      header: {
-        'User-Agent': 'DongLiVillageApp/1.0'
-      },
+      timeout: 3000,
+      header: { 'User-Agent': 'DongLiVillageApp/1.0' },
       success: (res) => {
+        if (settled) return
+        settled = true
+        clearTimeout(timer)
+
         if (res.statusCode === 200 && res.data) {
           const addr = res.data.address || {}
-          // 提取村庄/乡镇/区县信息
           const village = addr.village || addr.town || addr.city_district || addr.township || addr.county || addr.city || ''
           const district = addr.county || addr.city_district || addr.city || ''
-          const fullAddress = res.data.display_name || ''
-
           resolve({
             village: village || district || '附近',
-            address: district || village || '附近',
-            fullAddress
+            address: district || village || '附近'
           })
         } else {
-          resolve({ village: '附近', address: '附近', fullAddress: '' })
+          resolve({ village: '附近', address: '附近' })
         }
       },
       fail: () => {
-        resolve({ village: '附近', address: '附近', fullAddress: '' })
+        if (settled) return
+        settled = true
+        clearTimeout(timer)
+        resolve({ village: '附近', address: '附近' })
       }
     })
   })
@@ -95,7 +108,7 @@ export async function getLocationInfo() {
     const coords = await getCurrentLocation()
     const geoInfo = await reverseGeocode(coords.latitude, coords.longitude)
     const info = { ...coords, ...geoInfo }
-    // 缓存 30 分钟
+    // 缓存（即使反编码失败也缓存坐标，避免反复定位）
     uni.setStorageSync(LOCATION_KEY, info)
     return info
   } catch (e) {

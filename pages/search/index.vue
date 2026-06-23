@@ -272,9 +272,10 @@ onMounted(() => {
 
 <template>
   <view class="page-search">
-    <!-- 搜索头部 -->
-    <view class="search-header" :style="{ paddingTop: statusBarHeight + 'px' }">
-      <view class="search-header-inner">
+    <!-- 搜索头部（自定义导航 + 填满状态栏区域） -->
+    <view class="search-header-wrap">
+      <view class="search-status-bar" :style="{ height: statusBarHeight + 'px' }"></view>
+      <view class="search-header">
         <view class="search-back" @click="goBack">
           <text class="iconfont icon-back"></text>
         </view>
@@ -419,17 +420,22 @@ onMounted(() => {
   background: $bg-page;
 }
 
-/* ===== 搜索头部 ===== */
-.search-header {
+/* ===== 搜索头部（填满状态栏区域，无间隙） ===== */
+.search-header-wrap {
   background: $primary;
-  padding-bottom: 16rpx;
+}
 
-  .search-header-inner {
-    display: flex;
-    align-items: center;
-    height: 88rpx;
-    padding: 0 24rpx;
-  }
+.search-status-bar {
+  width: 100%;
+}
+
+.search-header {
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+  padding: 0 24rpx;
+  // 消除底部可能的空隙
+  margin-bottom: 0;
 
   .search-back {
     width: 60rpx;
