@@ -1,11 +1,10 @@
 const fs = require('fs')
 const path = require('path')
 
-// 读取 base64 字体数据
+// 读取 woff2 字体并转为 base64
 const b64 = fs.readFileSync(
-  path.join(__dirname, '..', 'static', 'iconfont', 'iconfont.base64.txt'),
-  'utf8'
-)
+  path.join(__dirname, '..', 'static', 'iconfont', 'iconfont.woff2')
+).toString('base64')
 
 // iconfont 原始类名映射表（从 iconfont.css 提取）
 const iconMap = {
@@ -30,6 +29,7 @@ const iconMap = {
   'icon-cart-shopping-trolley': '\\e66a',
   'icon-orders': '\\e698',
   'icon_location': '\\e626',
+  'icon_travel': '\\e603',
 }
 
 // 项目代码别名 → iconfont 原始类名
@@ -46,7 +46,7 @@ const aliases = {
   'icon-notice': 'icon_notice',
   'icon-service': 'icon-service',
   'icon-shop': 'icon-store',
-  'icon-travel': 'icon_more',      // 暂无旅游图标，用 more 代替
+  'icon-travel': 'icon_travel',
   'icon-market': 'icon_market',
   'icon-job': 'icon_job',
   'icon-health': 'iconhealth',
