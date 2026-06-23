@@ -99,7 +99,7 @@ onLoad((options) => {
     <view class="seller-section">
       <text class="section-title">卖家信息</text>
       <view class="seller-info">
-        <image class="seller-avatar" :src="detail.publisher.avatar" mode="aspectFill" />
+        <image class="seller-avatar" :src="detail.publisher.avatar" lazy-load mode="aspectFill" />
         <view class="seller-detail">
           <text class="seller-name">{{ detail.publisher.nickname }}</text>
           <text class="seller-phone">{{ detail.publisher.phone }}</text>

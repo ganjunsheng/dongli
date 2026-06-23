@@ -9,7 +9,15 @@ import { getSpotList } from '@/api/travel'
 /* ========== 搜索输入 ========== */
 const keyword = ref('')
 const inputRef = ref(null)
-let searchTimer = null
+
+/* ========== 防抖工具 ========== */
+function debounce(fn, delay = 400) {
+  let timer = null
+  return function (...args) {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => fn.apply(this, args), delay)
+  }
+}
 
 /* ========== 状态栏高度 ========== */
 const statusBarHeight = computed(() => {
@@ -179,12 +187,13 @@ function formatResults(list, module) {
   }))
 }
 
-// 防抖搜索
+// 防抖搜索（400ms）
+const debouncedSearch = debounce(() => doSearch(), 400)
+
 function onInput(e) {
   keyword.value = e.detail?.value ?? e
-  if (searchTimer) clearTimeout(searchTimer)
   if (keyword.value.trim()) {
-    searchTimer = setTimeout(() => doSearch(), 400)
+    debouncedSearch()
   } else {
     hasSearched.value = false
     resultList.value = []
@@ -203,7 +212,6 @@ function onClear() {
   keyword.value = ''
   hasSearched.value = false
   resultList.value = []
-  if (searchTimer) clearTimeout(searchTimer)
 }
 
 // 点击搜索建议
@@ -376,7 +384,8 @@ onMounted(() => {
           @click="goDetail(item)">
           <image
             class="result-image"
-            :src="item.image || '/static/images/placeholder.png'"
+            :src="item.image"
+            lazy-load
             mode="aspectFill"
           />
           <view class="result-info">

@@ -127,7 +127,7 @@ loadData()
     <view class="product-grid">
       <view class="product-card" v-for="item in productList" :key="item.id"
         @click="goDetail(item.id)">
-        <image class="product-image" :src="item.image" mode="aspectFill" />
+        <image class="product-image" :src="item.image" lazy-load mode="aspectFill" />
         <view class="product-tags" v-if="item.tags && item.tags.length">
           <text class="tag" v-for="tag in item.tags" :key="tag">{{ tag }}</text>
         </view>

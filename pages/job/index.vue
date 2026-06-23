@@ -116,7 +116,7 @@ loadData()
     <view class="job-list" v-if="currentTab === 1">
       <view class="job-card seek-card" v-for="item in jobList" :key="item.id">
         <view class="job-top">
-          <image class="seeker-avatar" :src="item.avatar" mode="aspectFill" />
+          <image class="seeker-avatar" :src="item.avatar" lazy-load mode="aspectFill" />
           <view class="seeker-info">
             <text class="seeker-name">{{ item.name }} · {{ item.gender }} · {{ item.age }}岁</text>
             <text class="seeker-expect">期望：{{ item.expectJob }} · {{ item.expectSalary }}</text>

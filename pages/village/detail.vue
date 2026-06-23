@@ -72,7 +72,7 @@ onLoad((options) => {
     <view class="detail-content">
       <!-- 图片 -->
       <image v-for="(img, index) in detail.images" :key="index"
-        class="content-image" :src="img" mode="widthFix" />
+        class="content-image" :src="img" lazy-load mode="widthFix" />
       
       <!-- 正文（富文本） -->
       <rich-text class="content-text" :nodes="detail.content"></rich-text>

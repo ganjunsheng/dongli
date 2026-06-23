@@ -109,7 +109,7 @@ loadData()
       <view class="waterfall-column">
         <view class="market-card" v-for="item in itemList.filter((_, i) => i % 2 === 0)" 
           :key="item.id" @click="goDetail(item.id)">
-          <image class="market-image" :src="item.image" mode="widthFix" />
+          <image class="market-image" :src="item.image" lazy-load mode="widthFix" />
           <view class="market-info">
             <text class="market-title text-ellipsis-2">{{ item.title }}</text>
             <view class="market-price-row">
@@ -118,7 +118,7 @@ loadData()
               </text>
             </view>
             <view class="market-author">
-              <image class="author-avatar" :src="item.avatar" mode="aspectFill" />
+              <image class="author-avatar" :src="item.avatar" lazy-load mode="aspectFill" />
               <text class="author-name">{{ item.nickname }}</text>
             </view>
           </view>
@@ -127,7 +127,7 @@ loadData()
       <view class="waterfall-column">
         <view class="market-card" v-for="item in itemList.filter((_, i) => i % 2 === 1)" 
           :key="item.id" @click="goDetail(item.id)">
-          <image class="market-image" :src="item.image" mode="widthFix" />
+          <image class="market-image" :src="item.image" lazy-load mode="widthFix" />
           <view class="market-info">
             <text class="market-title text-ellipsis-2">{{ item.title }}</text>
             <view class="market-price-row">
@@ -136,7 +136,7 @@ loadData()
               </text>
             </view>
             <view class="market-author">
-              <image class="author-avatar" :src="item.avatar" mode="aspectFill" />
+              <image class="author-avatar" :src="item.avatar" lazy-load mode="aspectFill" />
               <text class="author-name">{{ item.nickname }}</text>
             </view>
           </view>

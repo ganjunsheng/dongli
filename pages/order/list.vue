@@ -171,7 +171,7 @@ onShow(() => {
         <!-- 商品信息 -->
         <view class="order-goods" @click="goDetail(order.id)">
           <view class="goods-item" v-for="(item, idx) in (order.items || [])" :key="idx">
-            <image class="goods-img" :src="item.image || '/static/images/default/avatar.png'" mode="aspectFill" />
+            <image class="goods-img" :src="item.image" lazy-load mode="aspectFill" />
             <view class="goods-info">
               <text class="goods-name">{{ item.name || '商品名称' }}</text>
               <text class="goods-spec" v-if="item.spec">{{ item.spec }}</text>

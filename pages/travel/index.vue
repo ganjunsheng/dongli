@@ -88,7 +88,7 @@ loadData()
       <scroll-view class="spot-scroll" scroll-x>
         <view class="spot-card" v-for="item in spotList" :key="item.id"
           @click="goSpotDetail(item.id)">
-          <image class="spot-image" :src="item.image" mode="aspectFill" />
+          <image class="spot-image" :src="item.image" lazy-load mode="aspectFill" />
           <view class="spot-info">
             <text class="spot-name">{{ item.name }}</text>
             <view class="spot-rating">
@@ -105,7 +105,7 @@ loadData()
     <view class="hotel-list" v-if="currentTab === 1">
       <view class="hotel-card" v-for="item in hotelList" :key="item.id"
         @click="goHotelDetail(item.id)">
-        <image class="hotel-image" :src="item.image" mode="aspectFill" />
+        <image class="hotel-image" :src="item.image" lazy-load mode="aspectFill" />
         <view class="hotel-info">
           <text class="hotel-name">{{ item.name }}</text>
           <view class="hotel-meta">
@@ -124,7 +124,7 @@ loadData()
     <!-- 旅游攻略 -->
     <view class="guide-list" v-if="currentTab === 2">
       <view class="guide-card" v-for="item in guideList" :key="item.id">
-        <image class="guide-image" :src="item.image" mode="aspectFill" />
+        <image class="guide-image" :src="item.image" lazy-load mode="aspectFill" />
         <view class="guide-info">
           <text class="guide-title">{{ item.title }}</text>
           <view class="guide-meta">

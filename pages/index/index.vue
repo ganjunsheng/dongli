@@ -180,7 +180,7 @@ onMounted(() => {
       <view class="news-list">
         <view class="news-item" v-for="item in newsList" :key="item.id"
           @click="goNoticeDetail(item.id)">
-          <image class="news-image" :src="item.image" mode="aspectFill" />
+          <image class="news-image" :src="item.image" lazy-load mode="aspectFill" />
           <view class="news-info">
             <text class="news-title text-ellipsis">{{ item.title }}</text>
             <view class="news-meta">
@@ -201,7 +201,7 @@ onMounted(() => {
       <scroll-view class="product-scroll" scroll-x>
         <view class="product-item" v-for="item in productList" :key="item.id"
           @click="goProductDetail(item.id)">
-          <image class="product-image" :src="item.image" mode="aspectFill" />
+          <image class="product-image" :src="item.image" lazy-load mode="aspectFill" />
           <text class="product-name text-ellipsis">{{ item.name }}</text>
           <text class="product-price">¥{{ item.price }}</text>
           <text class="product-origin">{{ item.origin }}</text>

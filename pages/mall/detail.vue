@@ -153,7 +153,7 @@ onLoad((options) => {
       <text class="section-title">用户评价 ({{ detail.comments.length }})</text>
       <view class="comment-item" v-for="item in detail.comments" :key="item.id">
         <view class="comment-header">
-          <image class="comment-avatar" :src="item.avatar" mode="aspectFill" />
+          <image class="comment-avatar" :src="item.avatar" lazy-load mode="aspectFill" />
           <text class="comment-nickname">{{ item.nickname }}</text>
           <text class="comment-rating">⭐{{ item.rating }}</text>
         </view>
