@@ -8,7 +8,7 @@ import BaseButton from '@/components/BaseButton.vue'
 
 // 轮播图数据
 const swiperList = ref([
-  { id: 1, image: '/static/images/banner/banner1.png', title: '欢迎使用村里事儿' },
+  { id: 1, image: '/static/images/banner/banner1.png', title: '采菊东篱下，悠然见南山' },
   { id: 2, image: '/static/images/banner/banner2.png', title: '助农增收在行动' },
   { id: 3, image: '/static/images/banner/banner3.png', title: '乡村旅游等你来' }
 ])
