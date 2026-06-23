@@ -80,6 +80,11 @@ onPullDownRefresh(() => {
   }, 1000)
 })
 
+// 搜索
+function goSearch() {
+  uni.navigateTo({ url: '/pages/search/index?tab=mall' })
+}
+
 // 查看详情
 function goDetail(id) {
   uni.navigateTo({ url: `/pages/mall/detail?id=${id}` })

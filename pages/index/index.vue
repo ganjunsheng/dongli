@@ -1,12 +1,56 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { onPullDownRefresh } from '@dcloudio/uni-app'
 import { getNoticeList } from '@/api/village'
 import { getProductList } from '@/api/mall'
+import { getLocationInfo, chooseLocation } from '@/utils/location'
 import BaseCard from '@/components/BaseCard.vue'
 import BaseButton from '@/components/BaseButton.vue'
 
-// 轮播图数据
+/* ========== 状态栏 ========== */
+const statusBarHeight = computed(() => {
+  const info = uni.getSystemInfoSync()
+  return (info.statusBarHeight || 20) + 6
+})
+
+/* ========== 定位村庄 ========== */
+const villageName = ref('定位中...')
+const locationLoading = ref(false)
+
+async function initLocation() {
+  locationLoading.value = true
+  try {
+    const info = await getLocationInfo()
+    villageName.value = info.village || '附近'
+  } catch (e) {
+    villageName.value = '选择村庄'
+  } finally {
+    locationLoading.value = false
+  }
+}
+
+function handleLocationTap() {
+  uni.showActionSheet({
+    itemList: ['重新定位', '手动选择位置'],
+    success: async (res) => {
+      if (res.tapIndex === 0) {
+        // 重新 GPS 定位
+        villageName.value = '定位中...'
+        await initLocation()
+      } else if (res.tapIndex === 1) {
+        // 手动选择
+        try {
+          const info = await chooseLocation()
+          villageName.value = info.village || '已选位置'
+        } catch (e) {
+          // 用户取消
+        }
+      }
+    }
+  })
+}
+
+/* ========== 轮播图数据 ========== */
 const swiperList = ref([
   { id: 1, image: '/static/images/banner/banner1.png', title: '采菊东篱下，悠然见南山' },
   { id: 2, image: '/static/images/banner/banner2.png', title: '助农增收在行动' },
@@ -76,6 +120,7 @@ function goProductDetail(id) {
 
 onMounted(() => {
   loadData()
+  initLocation()
 })
 </script>
 
@@ -84,9 +129,10 @@ onMounted(() => {
     <!-- 自定义导航栏 -->
     <view class="navbar" :style="{ paddingTop: statusBarHeight + 'px' }">
       <view class="navbar-content">
-        <view class="navbar-left">
+        <view class="navbar-left" @click="handleLocationTap">
           <text class="iconfont icon-location"></text>
-          <text class="village-name">XX村</text>
+          <text class="village-name">{{ locationLoading ? '定位中...' : villageName }}</text>
+          <text class="village-arrow">▾</text>
         </view>
         <view class="navbar-search" @click="goPage('/pages/search/index')">
           <text class="iconfont icon-search"></text>
@@ -195,6 +241,11 @@ onMounted(() => {
     .village-name {
       margin-left: 8rpx;
       font-size: 28rpx;
+    }
+    .village-arrow {
+      margin-left: 4rpx;
+      font-size: 22rpx;
+      opacity: 0.7;
     }
   }
   
