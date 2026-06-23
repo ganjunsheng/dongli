@@ -53,6 +53,9 @@ function getSystemInfo() {
 </template>
 
 <style lang="scss">
+/* 引入图标库 - 内嵌 base64，兼容 H5 & 小程序 */
+@import './styles/iconfont.scss';
+
 /* 引入全局样式变量 */
 @import './uni.scss';
 

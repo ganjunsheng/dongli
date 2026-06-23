@@ -1,0 +1,103 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 5199573 */
+  src: url('//at.alicdn.com/t/c/font_5199573_249o34f3wnpj.woff2?t=1782204777388') format('woff2'),
+       url('//at.alicdn.com/t/c/font_5199573_249o34f3wnpj.woff?t=1782204777388') format('woff'),
+       url('//at.alicdn.com/t/c/font_5199573_249o34f3wnpj.ttf?t=1782204777388') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-iconhealth:before {
+  content: "\e638";
+}
+
+.icon-icon_home:before {
+  content: "\e696";
+}
+
+.icon-icon_more:before {
+  content: "\e69f";
+}
+
+.icon-icon_search:before {
+  content: "\e6aa";
+}
+
+.icon-icon-:before {
+  content: "\e727";
+}
+
+.icon-icon_about:before {
+  content: "\e682";
+}
+
+.icon-icon-add:before {
+  content: "\e602";
+}
+
+.icon-icon_arrow_right:before {
+  content: "\e6f6";
+}
+
+.icon-icon_bell:before {
+  content: "\e6f7";
+}
+
+.icon-icon_address:before {
+  content: "\e640";
+}
+
+.icon-icon_job:before {
+  content: "\e60a";
+}
+
+.icon-icon_notice:before {
+  content: "\e673";
+}
+
+.icon-icon_market:before {
+  content: "\e661";
+}
+
+.icon-icon-service:before {
+  content: "\e6e1";
+}
+
+.icon-icon-share:before {
+  content: "\e680";
+}
+
+.icon-icon_settings:before {
+  content: "\e6a9";
+}
+
+.icon-icon-store:before {
+  content: "\e609";
+}
+
+.icon-os-icon-back:before {
+  content: "\e60f";
+}
+
+.icon-icon-publish:before {
+  content: "\e794";
+}
+
+.icon-icon-cart-shopping-trolley:before {
+  content: "\e66a";
+}
+
+.icon-icon-orders:before {
+  content: "\e698";
+}
+
+.icon-icon_location:before {
+  content: "\e626";
+}
+
