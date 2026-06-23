@@ -1,0 +1,100 @@
+/* ========== 主色系 ========== */
+$primary:          #2E7D32 !default;  /* 主色：深翠绿 */
+$primary-light:    #60AD5E !default;  /* 主色浅变体 */
+$primary-dark:     #005005 !default;  /* 主色深变体 */
+$primary-bg:       #E8F5E9 !default;  /* 主色背景色 */
+
+/* ========== 辅助色 ========== */
+$aux-orange:       #FF8F00 !default;  /* 辅助橙：农产品/促销 */
+$aux-blue:         #1976D2 !default;  /* 辅助蓝：办事/政务 */
+$aux-red:          #D32F2F !default;  /* 警示红：紧急公告 */
+$aux-purple:       #7B1FA2 !default;  /* 辅助紫：文旅 */
+$aux-green:        #43A047 !default;  /* 辅助绿：免费/成功 */
+
+/* ========== 文字色 ========== */
+$text-primary:     #1A1A1A !default;  /* 主标题/正文 */
+$text-secondary:   #666666 !default;  /* 副标题/辅助文字 */
+$text-hint:        #999999 !default;  /* 提示语/占位文字 */
+$text-white:       #FFFFFF !default;  /* 白色文字 */
+$text-link:        #1976D2 !default;  /* 链接文字 */
+
+/* ========== 背景色 ========== */
+$bg-page:          #F5F5F5 !default;  /* 页面背景 */
+$bg-card:          #FFFFFF !default;  /* 卡片背景 */
+$bg-section:       #F0F7F0 !default;  /* 板块分隔背景 */
+$bg-disabled:      #E0E0E0 !default;  /* 禁用状态背景 */
+$bg-hover:         #F5F5F5 !default;  /* 点击态背景 */
+
+/* ========== 边框/分割线 ========== */
+$border-light:     #E8E8E8 !default;  /* 浅分割线 */
+$border-normal:    #D0D0D0 !default;  /* 普通边框 */
+
+/* ========== 字号规范 ========== */
+$font-xxl:         40rpx !default;    /* 超大标题 */
+$font-xl:          36rpx !default;    /* 一级标题 */
+$font-lg:          32rpx !default;    /* 二级标题 */
+$font-md:          30rpx !default;    /* 正文 */
+$font-sm:          28rpx !default;    /* 辅助文字 */
+$font-xs:          24rpx !default;    /* 小字 */
+$font-xxs:         22rpx !default;    /* 最小文字 */
+
+/* ========== 间距规范 ========== */
+$spacing-xs:       8rpx !default;
+$spacing-sm:       16rpx !default;
+$spacing-md:       24rpx !default;
+$spacing-lg:       32rpx !default;
+$spacing-xl:       48rpx !default;
+
+/* ========== 圆角规范 ========== */
+$radius-sm:        8rpx !default;
+$radius-md:        12rpx !default;
+$radius-lg:        16rpx !default;
+$radius-xl:        28rpx !default;    /* 胶囊标签 */
+$radius-round:     50% !default;
+
+/* ========== 按钮尺寸 ========== */
+$btn-height-lg:    88rpx !default;    /* 大按钮 */
+$btn-height-md:    72rpx !default;    /* 中按钮 */
+$btn-height-sm:    56rpx !default;    /* 小按钮 */
+
+/* ========== 阴影 ========== */
+$shadow-light:     0 2rpx 12rpx rgba(0, 0, 0, 0.08) !default;
+$shadow-normal:    0 4rpx 16rpx rgba(0, 0, 0, 0.12) !default;
+
+/* ========== 混合宏 ========== */
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-ellipsis-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+@mixin card-style {
+  background-color: $bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+  box-shadow: $shadow-light;
+}
+
+@mixin safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}

@@ -1,0 +1,157 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "村里事儿",
+        "navigationBarBackgroundColor": "#2E7D32",
+        "navigationBarTextStyle": "white",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/village/index",
+      "style": {
+        "navigationBarTitleText": "村务公告",
+        "navigationBarBackgroundColor": "#2E7D32",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/village/detail",
+      "style": {
+        "navigationBarTitleText": "公告详情",
+        "navigationBarBackgroundColor": "#2E7D32",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/village/service",
+      "style": {
+        "navigationBarTitleText": "便民办事",
+        "navigationBarBackgroundColor": "#2E7D32",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/mall/index",
+      "style": {
+        "navigationBarTitleText": "农产品商城",
+        "navigationBarBackgroundColor": "#2E7D32",
+        "navigationBarTextStyle": "white",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/mall/detail",
+      "style": {
+        "navigationBarTitleText": "商品详情",
+        "navigationBarBackgroundColor": "#2E7D32",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/travel/index",
+      "style": {
+        "navigationBarTitleText": "乡村旅游",
+        "navigationBarBackgroundColor": "#2E7D32",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/marketplace/index",
+      "style": {
+        "navigationBarTitleText": "闲置集市",
+        "navigationBarBackgroundColor": "#2E7D32",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/job/index",
+      "style": {
+        "navigationBarTitleText": "招工求职",
+        "navigationBarBackgroundColor": "#2E7D32",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/user/index",
+      "style": {
+        "navigationBarTitleText": "我的",
+        "navigationBarBackgroundColor": "#2E7D32",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/user/login",
+      "style": {
+        "navigationBarTitleText": "登录",
+        "navigationBarBackgroundColor": "#2E7D32",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/order/list",
+      "style": {
+        "navigationBarTitleText": "我的订单",
+        "navigationBarBackgroundColor": "#2E7D32",
+        "navigationBarTextStyle": "white",
+        "enablePullDownRefresh": false
+      }
+    }
+  ],
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#2E7D32",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "fontSize": "10px",
+    "spacing": 3,
+    "height": "50px",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "static/tab/home.png",
+        "selectedIconPath": "static/tab/home-active.png"
+      },
+      {
+        "pagePath": "pages/village/index",
+        "text": "村务",
+        "iconPath": "static/tab/village.png",
+        "selectedIconPath": "static/tab/village-active.png"
+      },
+      {
+        "pagePath": "pages/mall/index",
+        "text": "商城",
+        "iconPath": "static/tab/mall.png",
+        "selectedIconPath": "static/tab/mall-active.png"
+      },
+      {
+        "pagePath": "pages/travel/index",
+        "text": "旅游",
+        "iconPath": "static/tab/travel.png",
+        "selectedIconPath": "static/tab/travel-active.png"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "text": "我的",
+        "iconPath": "static/tab/user.png",
+        "selectedIconPath": "static/tab/user-active.png"
+      }
+    ]
+  },
+  "globalStyle": {
+    "navigationBarBackgroundColor": "#2E7D32",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F5F5F5",
+    "pageOrientation": "portrait"
+  },
+  "uniIdRouter": {},
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^base-(.*)": "@/components/Base$1.vue"
+    }
+  }
+}

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>乡村综合服务</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://unpkg.com/@vant/use@1"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@4/lib/index.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; }
+    
+    /* 配色变量 */
+    :root {
+      --primary: #2E7D32;
+      --primary-light: #60AD5E;
+      --aux-orange: #FF8F00;
+      --aux-red: #D32F2F;
+      --text-primary: #1A1A1A;
+      --text-secondary: #666666;
+      --text-hint: #999999;
+      --bg-page: #F5F5F5;
+      --bg-card: #FFFFFF;
+      --border-light: #E8E8E8;
+    }
+    
+    /* 自定义导航栏 */
+    .custom-navbar {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      padding: 0 32rpx;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar-left { display: flex; align-items: center; gap: 8rpx; font-size: 28rpx; }
+    .navbar-center { flex: 1; margin: 0 20rpx; }
+    .search-box {
+      background: rgba(255,255,255,0.9);
+      border-radius: 32rpx;
+      padding: 12rpx 24rpx;
+      font-size: 26rpx;
+      color: var(--text-hint);
+      display: flex;
+      align-items: center;
+      gap: 8rpx;
+    }
+    .navbar-right { position: relative; }
+    .badge {
+      position: absolute;
+      top: -8rpx;
+      right: -8rpx;
+      background: var(--aux-red);
+      color: white;
+      font-size: 20rpx;
+      min-width: 32rpx;
+      height: 32rpx;
+      border-radius: 16rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 8rpx;
+    }
+    
+    /* 轮播图 */
+    .swiper-container {
+      width: 100%;
+      height: 360rpx;
+      background: #ddd;
+      position: relative;
+      overflow: hidden;
+    }
+    .swiper-slide {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36rpx;
+      color: white;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .swiper-slide:nth-child(2) { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+    .swiper-slide:nth-child(3) { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+    .swiper-dots {
+      position: absolute;
+      bottom: 20rpx;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12rpx;
+    }
+    .swiper-dot {
+      width: 12rpx;
+      height: 12rpx;
+      border-radius: 6rpx;
+      background: rgba(255,255,255,0.5);
+    }
+    .swiper-dot.active { background: white; width: 24rpx; }
+    
+    /* 功能宫格 */
+    .func-grid {
+      background: var(--bg-card);
+      margin: 24rpx 32rpx;
+      border-radius: 16rpx;
+      padding: 24rpx;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24rpx;
+    }
+    .grid-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12rpx;
+    }
+    .grid-icon {
+      width: 96rpx;
+      height: 96rpx;
+      border-radius: 24rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 44rpx;
+    }
+    .grid-text { font-size: 24rpx; color: var(--text-secondary); }
+    
+    /* 公告栏 */
+    .notice-bar {
+      background: #FFF3E0;
+      margin: 0 32rpx 24rpx;
+      border-radius: 12rpx;
+      padding: 16rpx 24rpx;
+      display: flex;
+      align-items: center;
+      gap: 12rpx;
+      font-size: 26rpx;
+      color: #E65100;
+      overflow: hidden;
+    }
+    .notice-icon { font-size: 32rpx; }
+    .notice-text { flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    
+    /* 板块标题 */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24rpx 32rpx 16rpx;
+    }
+    .section-title {
+      font-size: 36rpx;
+      font-weight: bold;
+      color: var(--text-primary);
+      position: relative;
+      padding-left: 20rpx;
+    }
+    .section-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8rpx;
+      height: 32rpx;
+      background: var(--primary);
+      border-radius: 4rpx;
+    }
+    .section-more { font-size: 26rpx; color: var(--text-hint); }
+    
+    /* 公告列表 */
+    .news-list { padding: 0 32rpx; }
+    .news-card {
+      background: var(--bg-card);
+      border-radius: 16rpx;
+      padding: 24rpx;
+      margin-bottom: 20rpx;
+      display: flex;
+      gap: 20rpx;
+    }
+    .news-img {
+      width: 200rpx;
+      height: 150rpx;
+      border-radius: 12rpx;
+      background: #e0e0e0;
+      flex-shrink: 0;
+    }
+    .news-content { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .news-title { font-size: 30rpx; font-weight: 500; color: var(--text-primary); line-height: 1.4; }
+    .news-meta { display: flex; gap: 20rpx; font-size: 24rpx; color: var(--text-hint); }
+    
+    /* 农产品横滑 */
+    .product-scroll {
+      padding: 0 32rpx;
+      display: flex;
+      gap: 20rpx;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .product-scroll::-webkit-scrollbar { display: none; }
+    .product-card {
+      width: 280rpx;
+      flex-shrink: 0;
+      background: var(--bg-card);
+      border-radius: 16rpx;
+      overflow: hidden;
+    }
+    .product-img {
+      width: 280rpx;
+      height: 280rpx;
+      background: #e8f5e9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80rpx;
+    }
+    .product-info { padding: 16rpx 20rpx; }
+    .product-name { font-size: 28rpx; color: var(--text-primary); margin-bottom: 8rpx; }
+    .product-price { font-size: 32rpx; color: var(--aux-red); font-weight: bold; }
+    .product-origin { font-size: 24rpx; color: var(--text-hint); text-decoration: line-through; margin-left: 8rpx; }
+    
+    /* TabBar */
+    .tabbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100rpx;
+      background: white;
+      border-top: 1rpx solid var(--border-light);
+      display: flex;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    .tabbar-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4rpx;
+      font-size: 22rpx;
+      color: var(--text-hint);
+    }
+    .tabbar-item.active { color: var(--primary); }
+    .tabbar-icon { font-size: 44rpx; }
+    
+    /* 页面容器 */
+    .page-content { padding-bottom: 120rpx; }
+    
+    /* 快捷入口 */
+    .quick-entry {
+      background: var(--bg-card);
+      margin: 0 32rpx 24rpx;
+      border-radius: 16rpx;
+      padding: 24rpx;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20rpx;
+    }
+    .entry-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8rpx;
+      padding: 20rpx;
+      background: #f0f7f0;
+      border-radius: 12rpx;
+    }
+    .entry-icon { font-size: 48rpx; }
+    .entry-text { font-size: 24rpx; color: var(--text-secondary); }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- 自定义导航栏 -->
+    <div class="custom-navbar" style="height: calc(44px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top);">
+      <div class="navbar-left">
+        <span>📍</span>
+        <span>XX村</span>
+        <span>▼</span>
+      </div>
+      <div class="navbar-center">
+        <div class="search-box">🔍 搜索服务</div>
+      </div>
+      <div class="navbar-right">
+        <span style="font-size: 40rpx;">🔔</span>
+        <div class="badge">3</div>
+      </div>
+    </div>
+
+    <div class="page-content">
+      <!-- 轮播图 -->
+      <div class="swiper-container">
+        <div class="swiper-slide">🏞️ 乡村美景轮播图1</div>
+        <div class="swiper-dots">
+          <div class="swiper-dot active"></div>
+          <div class="swiper-dot"></div>
+          <div class="swiper-dot"></div>
+        </div>
+      </div>
+
+      <!-- 功能宫格 -->
+      <div class="func-grid">
+        <div class="grid-item">
+          <div class="grid-icon" style="background: #e8f5e9;">📢</div>
+          <span class="grid-text">村务公告</span>
+        </div>
+        <div class="grid-item">
+          <div class="grid-icon" style="background: #e3f2fd;">📋</div>
+          <span class="grid-text">便民办事</span>
+        </div>
+        <div class="grid-item">
+          <div class="grid-icon" style="background: #fff3e0;">🛒</div>
+          <span class="grid-text">助农商城</span>
+        </div>
+        <div class="grid-item">
+          <div class="grid-icon" style="background: #fce4ec;">🏞️</div>
+          <span class="grid-text">乡村旅游</span>
+        </div>
+        <div class="grid-item">
+          <div class="grid-icon" style="background: #f3e5f5;">🔄</div>
+          <span class="grid-text">闲置集市</span>
+        </div>
+        <div class="grid-item">
+          <div class="grid-icon" style="background: #e0f7fa;">💼</div>
+          <span class="grid-text">招工求职</span>
+        </div>
+        <div class="grid-item">
+          <div class="grid-icon" style="background: #fff9c4;">🏥</div>
+          <span class="grid-text">医疗健康</span>
+        </div>
+        <div class="grid-item">
+          <div class="grid-icon" style="background: #efebe9;">➕</div>
+          <span class="grid-text">更多服务</span>
+        </div>
+      </div>
+
+      <!-- 紧急公告栏 -->
+      <div class="notice-bar">
+        <span class="notice-icon">📢</span>
+        <span class="notice-text">⚠️ 紧急通知：明天上午8:00-12:00 全村停电检修，请各位村民提前做好准备</span>
+      </div>
+
+      <!-- 村务动态 -->
+      <div class="section-header">
+        <span class="section-title">村务动态</span>
+        <span class="section-more">更多 ›</span>
+      </div>
+      <div class="news-list">
+        <div class="news-card">
+          <div class="news-img" style="background: #e8f5e9; display: flex; align-items: center; justify-content: center; font-size: 60rpx;">📰</div>
+          <div class="news-content">
+            <div class="news-title">关于2024年农村合作医疗缴费通知</div>
+            <div class="news-meta">
+              <span>村委办公室</span>
+              <span>2024-01-15</span>
+              <span>浏览 123 次</span>
+            </div>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-img" style="background: #e3f2fd; display: flex; align-items: center; justify-content: center; font-size: 60rpx;">📋</div>
+          <div class="news-content">
+            <div class="news-title">本季度低保名单公示</div>
+            <div class="news-meta">
+              <span>民政局</span>
+              <span>2024-01-10</span>
+              <span>浏览 89 次</span>
+            </div>
+          </div>
+        </div>
+        <div class="news-card">
+          <div class="news-img" style="background: #fff3e0; display: flex; align-items: center; justify-content: center; font-size: 60rpx;">🎉</div>
+          <div class="news-content">
+            <div class="news-title">春节文艺汇演报名开始啦！</div>
+            <div class="news-meta">
+              <span>妇联</span>
+              <span>2024-01-08</span>
+              <span>浏览 256 次</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 特色农产品 -->
+      <div class="section-header">
+        <span class="section-title">特色农产品</span>
+        <span class="section-more">更多 ›</span>
+      </div>
+      <div class="product-scroll">
+        <div class="product-card">
+          <div class="product-img">🍎</div>
+          <div class="product-info">
+            <div class="product-name">红富士苹果</div>
+            <div>
+              <span class="product-price">¥39.9</span>
+              <span class="product-origin">¥59.0</span>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">🥬</div>
+          <div class="product-info">
+            <div class="product-name">有机大白菜</div>
+            <div>
+              <span class="product-price">¥15.8</span>
+              <span class="product-origin">¥25.0</span>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">🍯</div>
+          <div class="product-info">
+            <div class="product-name">土蜂蜜 500g</div>
+            <div>
+              <span class="product-price">¥89.0</span>
+              <span class="product-origin">¥120.0</span>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">🌽</div>
+          <div class="product-info">
+            <div class="product-name">糯玉米 5斤装</div>
+            <div>
+              <span class="product-price">¥29.9</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 便民服务快捷入口 -->
+      <div class="section-header">
+        <span class="section-title">便民服务</span>
+      </div>
+      <div class="quick-entry">
+        <div class="entry-item">
+          <span class="entry-icon">💧</span>
+          <span class="entry-text">水费缴纳</span>
+        </div>
+        <div class="entry-item">
+          <span class="entry-icon">⚡</span>
+          <span class="entry-text">电费缴纳</span>
+        </div>
+        <div class="entry-item">
+          <span class="entry-icon">📱</span>
+          <span class="entry-text">话费充值</span>
+        </div>
+        <div class="entry-item">
+          <span class="entry-icon">📄</span>
+          <span class="entry-text">证明开具</span>
+        </div>
+        <div class="entry-item">
+          <span class="entry-icon">🏥</span>
+          <span class="entry-text">医保查询</span>
+        </div>
+        <div class="entry-item">
+          <span class="entry-icon">📦</span>
+          <span class="entry-text">快递寄件</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TabBar -->
+    <div class="tabbar">
+      <div class="tabbar-item active">
+        <span class="tabbar-icon">🏠</span>
+        <span>首页</span>
+      </div>
+      <div class="tabbar-item">
+        <span class="tabbar-icon">🏘️</span>
+        <span>村务</span>
+      </div>
+      <div class="tabbar-item">
+        <span class="tabbar-icon">🛒</span>
+        <span>商城</span>
+      </div>
+      <div class="tabbar-item">
+        <span class="tabbar-icon">🏞️</span>
+        <span>乡村旅游</span>
+      </div>
+      <div class="tabbar-item">
+        <span class="tabbar-icon">👤</span>
+        <span>我的</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+    createApp({}).mount('#app');
+  </script>
+</body>
+</html>
