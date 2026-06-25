@@ -82,12 +82,15 @@ onLoad(() => {
       <!-- 右侧事项列表 -->
       <scroll-view class="service-list" scroll-y>
         <view class="service-card" v-for="item in serviceList" :key="item.id">
-          <view class="service-icon">📋</view>
+          <view class="service-icon-wrap">
+            <text class="service-icon iconfont icon-service"></text>
+          </view>
           <view class="service-info">
             <text class="service-name">{{ item.name }}</text>
             <text class="service-desc">{{ item.description }}</text>
             <view class="service-meta">
-              <text class="meta-time">办理时限：{{ item.duration }}</text>
+              <text class="meta-time">⏱ {{ item.duration }}</text>
+              <text class="meta-dept" v-if="item.department">{{ item.department }}</text>
             </view>
           </view>
           <view class="service-actions">
@@ -150,13 +153,27 @@ onLoad(() => {
 .service-card {
   background: #fff;
   border-radius: 16rpx;
-  padding: 24rpx;
+  padding: 28rpx 24rpx;
   margin-bottom: 16rpx;
   box-shadow: $shadow-light;
+  display: flex;
+  align-items: flex-start;
   
-  .service-icon {
-    font-size: 48rpx;
-    margin-bottom: 12rpx;
+  .service-icon-wrap {
+    width: 80rpx;
+    height: 80rpx;
+    background: linear-gradient(135deg, $primary-bg, #C8E6C9);
+    border-radius: 16rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-right: 20rpx;
+    
+    .service-icon {
+      font-size: 36rpx;
+      color: $primary;
+    }
   }
   
   .service-info {
@@ -179,10 +196,23 @@ onLoad(() => {
     
     .service-meta {
       margin-top: 12rpx;
+      display: flex;
+      gap: 16rpx;
       
       .meta-time {
         font-size: 22rpx;
         color: $text-hint;
+        background: $bg-page;
+        padding: 4rpx 14rpx;
+        border-radius: 6rpx;
+      }
+      
+      .meta-dept {
+        font-size: 22rpx;
+        color: $aux-blue;
+        background: #E3F2FD;
+        padding: 4rpx 14rpx;
+        border-radius: 6rpx;
       }
     }
   }

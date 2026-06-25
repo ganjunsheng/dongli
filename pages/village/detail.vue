@@ -109,30 +109,40 @@ onLoad((options) => {
 
 /* 标题区 */
 .detail-header {
-  padding: 32rpx;
-  border-bottom: 1rpx solid $border-light;
+  padding: 40rpx 32rpx 28rpx;
+  background: #fff;
   
   .detail-title {
     font-size: 40rpx;
     font-weight: bold;
     color: $text-primary;
-    line-height: 1.6;
+    line-height: 1.5;
     display: block;
+    margin-bottom: 20rpx;
   }
   
   .detail-meta {
     display: flex;
     align-items: center;
-    margin-top: 20rpx;
-    font-size: 24rpx;
-    color: $text-hint;
+    flex-wrap: wrap;
+    gap: 12rpx 24rpx;
     
-    .meta-source {
-      margin-right: 24rpx;
-    }
-    
-    .meta-time {
-      margin-right: 24rpx;
+    text {
+      font-size: 24rpx;
+      color: $text-hint;
+      background: $bg-page;
+      padding: 6rpx 16rpx;
+      border-radius: 6rpx;
+      
+      &.meta-source {
+        color: $primary;
+        background: $primary-bg;
+      }
+      
+      &.meta-views {
+        color: $aux-orange;
+        background: #FFF3E0;
+      }
     }
   }
 }
@@ -140,17 +150,30 @@ onLoad((options) => {
 /* 内容区 */
 .detail-content {
   padding: 32rpx;
+  background: #fff;
+  margin-top: 16rpx;
   
   .content-image {
     width: 100%;
     margin-bottom: 24rpx;
     border-radius: 12rpx;
+    box-shadow: $shadow-light;
   }
   
   .content-text {
     font-size: 30rpx;
     color: $text-primary;
-    line-height: 1.8;
+    line-height: 2;
+    
+    ::v-deep p {
+      margin-bottom: 20rpx;
+    }
+    
+    ::v-deep img {
+      max-width: 100% !important;
+      border-radius: 12rpx;
+      margin: 16rpx 0;
+    }
   }
 }
 
@@ -198,22 +221,25 @@ onLoad((options) => {
   right: 0;
   display: flex;
   padding: 16rpx 32rpx;
+  padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
   background: #fff;
   box-shadow: 0 -2rpx 12rpx rgba(0,0,0,0.08);
   
   .footer-btn {
     flex: 1;
-    height: 80rpx;
-    line-height: 80rpx;
+    height: 84rpx;
+    line-height: 84rpx;
     text-align: center;
-    border-radius: 40rpx;
-    font-size: 28rpx;
+    border-radius: 42rpx;
+    font-size: 30rpx;
+    font-weight: 500;
     border: none;
     
     &.share-btn {
-      background: $primary;
+      background: linear-gradient(135deg, $primary, $primary-dark);
       color: #fff;
-      margin-right: 16rpx;
+      margin-right: 20rpx;
+      box-shadow: 0 4rpx 12rpx rgba(46,125,50,0.3);
     }
     
     &.back-btn {

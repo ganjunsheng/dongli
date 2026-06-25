@@ -187,22 +187,40 @@ onLoad(() => {
 .form-section {
   background: #fff;
   margin-bottom: 20rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: $shadow-light;
   
   .form-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 28rpx 32rpx;
+    padding: 30rpx 32rpx;
     border-bottom: 1rpx solid $border-light;
     
     &:last-child {
       border-bottom: none;
     }
     
+    &:active {
+      background: $bg-hover;
+    }
+    
     .form-label {
       font-size: 30rpx;
       color: $text-primary;
       width: 160rpx;
+      
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 8rpx;
+        height: 8rpx;
+        background: $primary;
+        border-radius: 50%;
+        margin-right: 12rpx;
+        vertical-align: middle;
+      }
     }
     
     .form-value {
@@ -218,8 +236,8 @@ onLoad(() => {
       }
       
       .form-arrow {
-        color: $text-hint;
-        font-size: 28rpx;
+        color: #ccc;
+        font-size: 24rpx;
       }
     }
   }

@@ -59,8 +59,8 @@ const gridList = ref([
   { id: 4, icon: 'travel', title: '乡村旅游', url: '/pages/travel/index' },
   { id: 5, icon: 'market', title: '闲置集市', url: '/pages/marketplace/index' },
   { id: 6, icon: 'job', title: '招工求职', url: '/pages/job/index' },
-  { id: 7, icon: 'health', title: '医疗健康', url: '' },
-  { id: 8, icon: 'more', title: '更多服务', url: '' }
+  { id: 7, icon: 'health', title: '医疗健康', url: '/pages/health/index' },
+  { id: 8, icon: 'more', title: '更多服务', url: '/pages/health/index' }
 ])
 
 // 紧急公告

@@ -107,6 +107,30 @@
         "navigationBarTextStyle": "white",
         "enablePullDownRefresh": false
       }
+    },
+    {
+      "path": "pages/health/index",
+      "style": {
+        "navigationBarTitleText": "医疗健康",
+        "navigationBarBackgroundColor": "#2E7D32",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/health/emergency-guide",
+      "style": {
+        "navigationBarTitleText": "急救指南",
+        "navigationBarBackgroundColor": "#D32F2F",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/health/bmi-calculator",
+      "style": {
+        "navigationBarTitleText": "BMI计算器",
+        "navigationBarBackgroundColor": "#2E7D32",
+        "navigationBarTextStyle": "white"
+      }
     }
   ],
   "tabBar": {
